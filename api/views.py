@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.models import Student
 from api.serializers import StudentSerializer
-from django.http.response import HttpResponse
+import json, sys
 
 @api_view(['GET', 'POST'])
 def student_list(request):
@@ -17,7 +17,13 @@ def student_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = StudentSerializer(data=request.data)
+        linestr = request.body.decode('utf8')
+        sys.stderr.write(linestr)
+        print(linestr)
+        data = json.loads(linestr)
+        print("data:")
+        print(data)
+        serializer = StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

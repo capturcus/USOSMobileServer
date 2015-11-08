@@ -25,7 +25,7 @@ SECRET_KEY = '7y443@@zh!gpi7dw1znnlj_f8+kmc)@&^!qc#u=#2%%9&(x7ik'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -103,3 +103,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        # Log to a text file that can be rotated by logrotate
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': '/var/log/nginx/django.log'
+        },
+    },
+    'loggers': {
+        # Might as well log any errors anywhere else in Django
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
