@@ -1,10 +1,14 @@
-from django.shortcuts import render
+import json
+
 from rest_framework import status
 from rest_framework.decorators import api_view
+
 from rest_framework.response import Response
+from django.http.response import HttpResponse
+
 from api.models import Student
 from api.serializers import StudentSerializer
-import json, sys
+
 
 @api_view(['GET', 'POST'])
 def student_list(request):
@@ -14,15 +18,11 @@ def student_list(request):
     if request.method == 'GET':
         snippets = Student.objects.all()
         serializer = StudentSerializer(snippets, many=True)
-        return Response(serializer.data)
+        return HttpResponse(serializer.data)
 
     elif request.method == 'POST':
         linestr = request.body.decode('utf8')
-        sys.stderr.write(linestr)
-        print(linestr)
         data = json.loads(linestr)
-        print("data:")
-        print(data)
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
