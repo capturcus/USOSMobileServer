@@ -1,4 +1,4 @@
 #!/bin/bash
-killall uwsgi_python3
+killall uwsgi
 ./uwsgi.sh
 

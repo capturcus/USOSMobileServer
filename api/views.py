@@ -1,4 +1,4 @@
-import json
+import json, sys
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -22,7 +22,11 @@ def student_list(request):
 
     elif request.method == 'POST':
         linestr = request.body.decode('utf8')
-        data = json.loads(linestr)
+	sys.stderr.write("data"+linestr)
+        try:
+            data = json.loads(linestr)
+        except ValueError as e:
+            return HttpResponse("bad data format", status=status.HTTP_400_BAD_REQUEST)
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
