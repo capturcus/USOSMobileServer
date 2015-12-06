@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7y443@@zh!gpi7dw1znnlj_f8+kmc)@&^!qc#u=#2%%9&(x7ik'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.google.com']
 
 
 # Application definition
@@ -43,10 +43,11 @@ INSTALLED_APPS = (
 )
 
 PUSH_NOTIFICATIONS_SETTINGS = {
-    "GCM_API_KEY": "AIzaSyBFxIjI_no7Ip9pgRdFqBKhNVwUvZ2zbEU",
+    "GCM_API_KEY": "AIzaSyCEwf4wwRMHj1B7MHYjnfBr2YfPw5fbrVA",
 }
 
 MIDDLEWARE_CLASSES = (
+#    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,9 +94,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
@@ -128,3 +129,5 @@ LOGGING = {
         },
     },
 }
+
+APPEND_SLASH=False

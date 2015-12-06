@@ -19,5 +19,8 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^students/$', 'api.views.student_list'),
+#    url(r'^sendall/$', 'api.views.sendall'),
+    url(r'^register/$', 'api.views.register'),
+    url(r'^usoscallback$', 'api.views.usos_callback'),
     url(r'^$', 'website.views.index_view'),
 ]
