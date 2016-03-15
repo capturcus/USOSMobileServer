@@ -25,7 +25,7 @@ SECRET_KEY = '7y443@@zh!gpi7dw1znnlj_f8+kmc)@&^!qc#u=#2%%9&(x7ik'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
-ALLOWED_HOSTS = ['.google.com']
+ALLOWED_HOSTS = ['.google.com', u'193.0.67.66','usosalert.net.uw.edu.pl']
 
 
 # Application definition

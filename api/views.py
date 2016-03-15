@@ -70,17 +70,24 @@ def deb(s):
 @api_view(['POST','GET'])
 def usos_callback(request):
     if request.method == 'POST':
+        deb(request.body)
         data = json.loads(request.body)
+	deb(data)
+#        deb(data["event_type"])
         for i in data["entry"]:
             ret_ = {"operation": i["operation"], "node_id":i["node_id"],"type":data["event_type"]}
+            if data["event_type"] == "grades/grade":
+                ret_["grade"] = i["grade"]
             for j in i["related_user_ids"]:
                 ret = copy.deepcopy(ret_)
                 ret["id"] = j
                 deb(j)
                 student = Student.objects.get(usosid=int(j))
-                deb(student.deviceid)
+                deb("DEVICEID:" + student.deviceid)
                 device = GCMDevice.objects.get(registration_id=student.deviceid)
+		deb(json.dumps(ret))
                 device.send_message(json.dumps(ret))
         return HttpResponse()
     elif request.method == 'GET':
         return HttpResponse(request.GET['hub.challenge'])
+
